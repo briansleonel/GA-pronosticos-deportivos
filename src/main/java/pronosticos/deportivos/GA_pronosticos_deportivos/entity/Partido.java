@@ -34,10 +34,10 @@ public class Partido {
 	}
 
 	public ResultadoEnum getResultado(int goles1, int goles2) {
-		if (goles1 > goles2) {
-			return ResultadoEnum.GANADOR;
-		} else if (goles1 == goles2) {
+		if (goles1 == goles2) {
 			return ResultadoEnum.EMPATE;
+		} else if (goles1 > goles2) {
+			return ResultadoEnum.GANADOR;
 		} else {
 			return ResultadoEnum.PERDEDOR;
 		}

@@ -27,9 +27,14 @@ public class App {
 
 		List<Pronostico> listadoPronosticos = getPronosticos(listadoPartidos);
 
-		for (Pronostico e : listadoPronosticos) {
-			System.out.println(e);
+		int puntos = 0;
+		
+		for (Pronostico pronostico : listadoPronosticos) {
+			System.out.println(pronostico);
+			puntos += pronostico.puntos();
 		}
+		
+		System.out.println("La persona tiene un total de " + puntos + " puntos");
 
 	}
 

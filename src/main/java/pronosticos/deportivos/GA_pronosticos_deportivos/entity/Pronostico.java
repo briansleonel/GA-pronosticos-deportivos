@@ -26,7 +26,10 @@ public class Pronostico {
 	}
 
 	public int puntos() {
-		return 0;
+		if (partido.resultado(equipo) == (resultado))
+			return 1;
+		else
+			return 0;
 	}
 
 	/**
