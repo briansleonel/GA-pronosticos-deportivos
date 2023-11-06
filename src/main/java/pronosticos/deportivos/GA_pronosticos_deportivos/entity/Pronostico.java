@@ -57,4 +57,9 @@ public class Pronostico {
 		this.resultado = resultado;
 	}
 
+	@Override
+	public String toString() {
+		return "Pronostico [partido=" + partido + ", equipo=" + equipo.getNombre() + ", resultado=" + resultado + "]";
+	}
+
 }
