@@ -26,7 +26,10 @@ public class Pronostico {
 	}
 
 	public int puntos() {
-		return 0;
+		if (partido.resultado(equipo) == (resultado))
+			return 1;
+		else
+			return 0;
 	}
 
 	/**
@@ -55,6 +58,11 @@ public class Pronostico {
 
 	public void setResultado(ResultadoEnum resultado) {
 		this.resultado = resultado;
+	}
+
+	@Override
+	public String toString() {
+		return "Pronostico [partido=" + partido + ", equipo=" + equipo.getNombre() + ", resultado=" + resultado + "]";
 	}
 
 }
