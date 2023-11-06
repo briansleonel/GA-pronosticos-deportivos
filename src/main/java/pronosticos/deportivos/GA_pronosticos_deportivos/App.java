@@ -34,7 +34,7 @@ public class App {
 			puntos += pronostico.puntos();
 		}
 		
-		System.out.println("La persona tiene un total de " + puntos + " puntos");
+		System.out.println("Puntaje del pronostico de una persona: " + puntos + " pts.");
 
 	}
 
