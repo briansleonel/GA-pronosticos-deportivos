@@ -22,6 +22,28 @@ public class Partido {
 	}
 
 	/**
+	 * ------- METODOS -------
+	 */
+
+	public ResultadoEnum resultado(Equipo equipo) {
+		if (equipo.getNombre().equalsIgnoreCase(equipo1.getNombre())) {
+			return getResultado(golesEquipo1, golesEquipo2);
+		} else {
+			return getResultado(golesEquipo2, golesEquipo1);
+		}
+	}
+
+	public ResultadoEnum getResultado(int goles1, int goles2) {
+		if (goles1 > goles2) {
+			return ResultadoEnum.GANADOR;
+		} else if (goles1 == goles2) {
+			return ResultadoEnum.EMPATE;
+		} else {
+			return ResultadoEnum.PERDEDOR;
+		}
+	}
+
+	/**
 	 * ------- GETTERS AND SETTERS -------
 	 */
 
@@ -55,5 +77,11 @@ public class Partido {
 
 	public void setGolesEquipo2(int golesEquipo2) {
 		this.golesEquipo2 = golesEquipo2;
+	}
+
+	@Override
+	public String toString() {
+		return "Partido [equipo1=" + equipo1.getNombre() + ", equipo2=" + equipo2.getNombre() + ", golesEquipo1="
+				+ golesEquipo1 + ", golesEquipo2=" + golesEquipo2 + "]";
 	}
 }
