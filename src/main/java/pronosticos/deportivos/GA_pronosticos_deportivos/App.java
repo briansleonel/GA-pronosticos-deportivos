@@ -13,22 +13,24 @@ import org.apache.commons.csv.CSVRecord;
 
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Equipo;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Partido;
+import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Pronostico;
+import pronosticos.deportivos.GA_pronosticos_deportivos.entity.ResultadoEnum;
 
-/**
- * Hello world!
- *
- */
 public class App {
 	public static final String PATH_CSV_RESULTADOS = "./resultados.csv";
 	public static final String PATH_CSV_EQUIPOS = "./equipos.csv";
+	public static final String PATH_CSV_PRONOSTICOS = "./pronostico.csv";
 
 	public static void main(String[] args) throws IOException {
 		List<Equipo> listadoEquipos = getEquipos();
 		List<Partido> listadoPartidos = getPartidos(listadoEquipos);
 
-		for (Partido e : listadoPartidos) {
+		List<Pronostico> listadoPronosticos = getPronosticos(listadoPartidos);
+
+		for (Pronostico e : listadoPronosticos) {
 			System.out.println(e);
 		}
+
 	}
 
 	public static List<Partido> getPartidos(List<Equipo> listadoEquipos) throws IOException {
@@ -96,5 +98,40 @@ public class App {
 		}
 
 		return equipos;
+	}
+
+	public static List<Pronostico> getPronosticos(List<Partido> listadoPartidos) throws IOException {
+		List<Pronostico> pronosticos = new ArrayList<Pronostico>();
+
+		try {
+			Reader reader = Files.newBufferedReader(Paths.get(PATH_CSV_PRONOSTICOS));
+
+			@SuppressWarnings("resource")
+			CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
+
+			for (CSVRecord csvRecord : csvParser) {
+				Partido partidoEncontrado = new Partido();
+
+				for (Partido p : listadoPartidos) {
+					if (p.getEquipo1().getNombre().equalsIgnoreCase(csvRecord.get(0))
+							&& p.getEquipo2().getNombre().equalsIgnoreCase(csvRecord.get(2))) {
+						partidoEncontrado = p;
+						break;
+					}
+				}
+
+				Pronostico pronostico = new Pronostico();
+				pronostico.setPartido(partidoEncontrado);
+				pronostico.setEquipo(partidoEncontrado.getEquipo1());
+				pronostico.setResultado(ResultadoEnum.valueOf(csvRecord.get(1)));
+
+				pronosticos.add(pronostico);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return pronosticos;
 	}
 }
