@@ -14,6 +14,7 @@ import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Equipo;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Partido;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Pronostico;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.ResultadoEnum;
+import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Usuario;
 
 public class LectorArchivoService {
 	public static List<Equipo> leerArchivoEquipos(String path) {
@@ -97,8 +98,8 @@ public class LectorArchivoService {
 				Partido partidoEncontrado = new Partido();
 
 				for (Partido p : listadoPartidos) {
-					if (p.getEquipo1().getNombre().equalsIgnoreCase(csvRecord.get(0))
-							&& p.getEquipo2().getNombre().equalsIgnoreCase(csvRecord.get(2))) {
+					if (p.getEquipo1().getNombre().equalsIgnoreCase(csvRecord.get(1))
+							&& p.getEquipo2().getNombre().equalsIgnoreCase(csvRecord.get(3))) {
 						partidoEncontrado = p;
 						break;
 					}
@@ -107,7 +108,7 @@ public class LectorArchivoService {
 				Pronostico pronostico = new Pronostico();
 				pronostico.setPartido(partidoEncontrado);
 				pronostico.setEquipo(partidoEncontrado.getEquipo1());
-				pronostico.setResultado(ResultadoEnum.valueOf(csvRecord.get(1)));
+				pronostico.setResultado(ResultadoEnum.valueOf(csvRecord.get(2)));
 
 				pronosticos.add(pronostico);
 			}
@@ -117,5 +118,28 @@ public class LectorArchivoService {
 		}
 
 		return pronosticos;
+	}
+
+	public static List<Usuario> leerArchivoUsuarios(String path) {
+		List<Usuario> usuarios = new ArrayList<>();
+
+		try {
+			Reader reader = Files.newBufferedReader(Paths.get(path));
+
+			@SuppressWarnings("resource")
+			CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
+
+			for (CSVRecord csvRecord : csvParser) {
+				Usuario usuario = new Usuario();
+				usuario.setNombre(csvRecord.get(0));
+
+				usuarios.add(usuario);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return usuarios;
 	}
 }
