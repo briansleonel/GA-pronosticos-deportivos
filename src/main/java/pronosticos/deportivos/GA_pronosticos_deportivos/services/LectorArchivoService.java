@@ -85,7 +85,8 @@ public class LectorArchivoService {
 		return partidos;
 	}
 
-	public static List<Pronostico> leerArchivoPronosticos(String path, List<Partido> listadoPartidos) {
+	public static List<Pronostico> leerArchivoPronosticos(String path, List<Partido> listadoPartidos,
+			List<Usuario> listadoUsuarios) {
 		List<Pronostico> pronosticos = new ArrayList<Pronostico>();
 
 		try {
@@ -93,6 +94,7 @@ public class LectorArchivoService {
 
 			@SuppressWarnings("resource")
 			CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
+			// csvParser.getRecords()
 
 			for (CSVRecord csvRecord : csvParser) {
 				Partido partidoEncontrado = new Partido();
@@ -106,15 +108,24 @@ public class LectorArchivoService {
 				}
 
 				Pronostico pronostico = new Pronostico();
+
 				pronostico.setPartido(partidoEncontrado);
 				pronostico.setEquipo(partidoEncontrado.getEquipo1());
 				pronostico.setResultado(ResultadoEnum.valueOf(csvRecord.get(2)));
 
 				pronosticos.add(pronostico);
+
+				for (Usuario u : listadoUsuarios) {
+					if (csvRecord.get(0).equalsIgnoreCase(u.getNombre())) {
+						u.agregarPronostico(pronostico);
+						break;
+					}
+				}
+
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
 		}
 
 		return pronosticos;

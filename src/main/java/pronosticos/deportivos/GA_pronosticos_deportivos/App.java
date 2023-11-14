@@ -21,16 +21,17 @@ public class App {
 		List<Partido> listadoPartidos = LectorArchivoService.leerArchivoPartidos(PATH_CSV_RESULTADOS, listadoEquipos);
 
 		List<Pronostico> listadoPronosticos = LectorArchivoService.leerArchivoPronosticos(PATH_CSV_PRONOSTICOS,
-				listadoPartidos);
+				listadoPartidos, listadoUsuarios);
 
-		int puntos = 0;
-
+		// Listado de pronosticos
+		System.out.println("Listado de pronosticos:");
 		for (Pronostico pronostico : listadoPronosticos) {
 			System.out.println(pronostico);
-			puntos += pronostico.puntos();
 		}
 
-		System.out.println("Puntaje del pronostico de una persona: " + puntos + " pts.");
-
+		System.out.println("\nPuntaje de usuarios:");
+		listadoUsuarios.forEach(u -> {
+			System.out.println(u.getNombre() + ": " + u.puntos() + "pts.");
+		});
 	}
 }

@@ -1,5 +1,6 @@
 package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -7,12 +8,25 @@ public class Usuario {
 	private List<Pronostico> pronosticos;
 
 	public Usuario() {
+		this.pronosticos = new ArrayList<Pronostico>();
 	}
 
-	public Usuario(String nombre, List<Pronostico> pronosticos) {
+	public Usuario(String nombre) {
 		super();
 		this.nombre = nombre;
-		this.pronosticos = pronosticos;
+		this.pronosticos = new ArrayList<Pronostico>();
+	}
+
+	public void agregarPronostico(Pronostico pronostico) {
+		this.pronosticos.add(pronostico);
+	}
+
+	public int puntos() {
+		int puntos = 0;
+		for (Pronostico p : this.pronosticos) {
+			puntos += p.puntos();
+		}
+		return puntos;
 	}
 
 	public String getNombre() {
