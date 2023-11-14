@@ -54,24 +54,25 @@ public class LectorArchivoService {
 				Equipo equipo2 = new Equipo();
 
 				for (Equipo e : listadoEquipos) {
-					if (e.getNombre().equalsIgnoreCase(csvRecord.get(0))) {
+					if (e.getNombre().equalsIgnoreCase(csvRecord.get(1))) {
 						equipo1 = e;
 						break;
 					}
 				}
 
 				for (Equipo e : listadoEquipos) {
-					if (e.getNombre().equalsIgnoreCase(csvRecord.get(3))) {
+					if (e.getNombre().equalsIgnoreCase(csvRecord.get(4))) {
 						equipo2 = e;
 						break;
 					}
 				}
 
 				Partido partido = new Partido();
+				partido.setRonda(Integer.parseInt(csvRecord.get(0)));
 				partido.setEquipo1(equipo1);
 				partido.setEquipo2(equipo2);
-				partido.setGolesEquipo1(Integer.parseInt(csvRecord.get(1)));
-				partido.setGolesEquipo2(Integer.parseInt(csvRecord.get(2)));
+				partido.setGolesEquipo1(Integer.parseInt(csvRecord.get(2)));
+				partido.setGolesEquipo2(Integer.parseInt(csvRecord.get(3)));
 
 				partidos.add(partido);
 			}
