@@ -1,6 +1,8 @@
 package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 
 public class Partido {
+
+	private int ronda;
 	private Equipo equipo1;
 	private Equipo equipo2;
 	private int golesEquipo1;
@@ -79,9 +81,17 @@ public class Partido {
 		this.golesEquipo2 = golesEquipo2;
 	}
 
+	public int getRonda() {
+		return ronda;
+	}
+
+	public void setRonda(int ronda) {
+		this.ronda = ronda;
+	}
+
 	@Override
 	public String toString() {
-		return "Partido [equipo1=" + equipo1.getNombre() + ", equipo2=" + equipo2.getNombre() + ", golesEquipo1="
-				+ golesEquipo1 + ", golesEquipo2=" + golesEquipo2 + "]";
+		return "Partido [ronda=" + ronda + ",equipo1=" + equipo1.getNombre() + ", equipo2=" + equipo2.getNombre()
+				+ ", golesEquipo1=" + golesEquipo1 + ", golesEquipo2=" + golesEquipo2 + "]";
 	}
 }

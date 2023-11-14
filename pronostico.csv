@@ -1,2 +1,8 @@
-Argentina,GANADOR,Arabia Saudita
-Polonia,EMPATE,Mexico
+Mariana,Argentina,GANADOR,Arabia Saudita
+Mariana,Polonia,EMPATE,Mexico
+Mariana,Argentina,GANADOR,Mexico
+Mariana,Arabia Saudita,PERDEDOR,Polonia
+Pedro,Argentina,GANADOR,Arabia Saudita
+Pedro,Polonia,PERDEDOR,Mexico
+Pedro,Argentina,GANADOR,Mexico
+Pedro,Arabia Saudita,EMPATE,Polonia
