@@ -3,6 +3,7 @@ package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 import java.util.List;
 
 public class Ronda {
+	private Integer id;
 	private int nro;
 	private List<Partido> partidos;
 
@@ -26,6 +27,13 @@ public class Ronda {
 	/**
 	 * ------- GETTERS AND SETTERS -------
 	 */
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public int getNro() {
 		return nro;
@@ -42,12 +50,11 @@ public class Ronda {
 	public void setPartidos(List<Partido> partidos) {
 		this.partidos = partidos;
 	}
-	
+
 	public int cantidadPartidoRonda(int ronda) {
-		if(ronda == this.getNro()) {
+		if (ronda == this.getNro()) {
 			return this.partidos.size();
-		}
-		else {
+		} else {
 			return 0;
 		}
 	}

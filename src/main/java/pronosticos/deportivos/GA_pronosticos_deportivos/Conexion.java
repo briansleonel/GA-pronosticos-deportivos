@@ -8,8 +8,8 @@ public class Conexion {
 	private static final String CONTROLADOR = "com.mysql.cj.jdbc.Driver";
 	private static final String DB = "pronostico_deportivo";
 	private static final String USUARIO = "root";
-	private static final String PASSWORD = "romina1996";
-	private static final String URL = "jdbc:mysql://localhost:3308/" + DB;
+	private static final String PASSWORD = "";
+	private static final String URL = "jdbc:mysql://localhost:3306/" + DB;
 	
 	static {
 		try {
