@@ -3,6 +3,7 @@ package pronosticos.deportivos.GA_pronosticos_deportivos.services;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.apache.commons.csv.CSVRecord;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Equipo;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Partido;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Pronostico;
+import pronosticos.deportivos.GA_pronosticos_deportivos.entity.PronosticoDto;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.ResultadoEnum;
 import pronosticos.deportivos.GA_pronosticos_deportivos.entity.Usuario;
 
@@ -153,4 +155,57 @@ public class LectorArchivoService {
 
 		return usuarios;
 	}
+
+	public static List<Pronostico> leerArchivoPronosticosDB(ResultSet pronosticos, List<Partido> listadoPartidos,
+					List<Usuario> listadoUsuarios) {
+				List<Pronostico> pronosticosList = new ArrayList<Pronostico>();
+				List<PronosticoDto> pronosticoDtoList = new ArrayList<PronosticoDto>();
+				try {
+					
+					while(pronosticos.next()) {
+						PronosticoDto pronosticoDto = new PronosticoDto();
+						pronosticoDto.setUsuario(pronosticos.getString("usuario"));
+						pronosticoDto.setEquipo1(pronosticos.getString("equipo1"));
+						pronosticoDto.setEquipo2(pronosticos.getString("equipo2"));
+						pronosticoDto.setResultado(pronosticos.getString("resultado"));
+						
+						pronosticoDtoList.add(pronosticoDto);
+					}
+
+					for (PronosticoDto pl : pronosticoDtoList) {
+						Partido partidoEncontrado = new Partido();
+
+						for (Partido p : listadoPartidos) {
+							if (p.getEquipo1().getNombre().equalsIgnoreCase(pl.getEquipo1())
+									&& p.getEquipo2().getNombre().equalsIgnoreCase(pl.getEquipo2())) {
+								partidoEncontrado = p;
+								break;
+							}
+						}
+
+						Pronostico pronostico = new Pronostico();
+
+						pronostico.setPartido(partidoEncontrado);
+						pronostico.setEquipo(partidoEncontrado.getEquipo1());
+						pronostico.setResultado(ResultadoEnum.valueOf(pl.getResultado()));
+
+						pronosticosList.add(pronostico);
+
+						for (Usuario u : listadoUsuarios) {
+							if (pl.getUsuario().equalsIgnoreCase(u.getNombre())) {
+								u.agregarPronostico(pronostico);
+								break;
+							}
+						}
+
+					}
+
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+
+				return pronosticosList;
+			}
+
+
 }

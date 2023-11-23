@@ -93,5 +93,5 @@ public class Partido {
 	public String toString() {
 		return "Partido [ronda=" + ronda + ",equipo1=" + equipo1.getNombre() + ", equipo2=" + equipo2.getNombre()
 				+ ", golesEquipo1=" + golesEquipo1 + ", golesEquipo2=" + golesEquipo2 + "]";
-	}
+	}	
 }
