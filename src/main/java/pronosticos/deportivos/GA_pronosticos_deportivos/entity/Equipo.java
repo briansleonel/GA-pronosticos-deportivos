@@ -1,6 +1,7 @@
 package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 
 public class Equipo {
+	private Integer id;
 	private String nombre;
 	private String descripcion;
 
@@ -20,6 +21,13 @@ public class Equipo {
 	/**
 	 * ------- GETTERS AND SETTERS -------
 	 */
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return nombre;

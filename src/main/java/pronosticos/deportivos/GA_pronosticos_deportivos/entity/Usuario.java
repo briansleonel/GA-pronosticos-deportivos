@@ -3,8 +3,8 @@ package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Usuario {
+	private Integer id;
 	private String nombre;
 	private List<Pronostico> pronosticos;
 
@@ -26,13 +26,21 @@ public class Usuario {
 		int puntos = 0;
 		for (Pronostico p : this.pronosticos) {
 			for (Resultado r : resultado) {
-				if(p.getResultado() == r.getResultado()) {
+				if (p.getResultado() == r.getResultado()) {
 					System.out.println(r.getPuntos());
 					puntos += r.getPuntos();
-				}	
+				}
 			}
 		}
 		return puntos;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNombre() {

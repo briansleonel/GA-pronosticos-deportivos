@@ -1,6 +1,7 @@
 package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 
 public class Pronostico {
+	private Integer id;
 	private Partido partido;
 	private Equipo equipo;
 	private ResultadoEnum resultado;
@@ -35,6 +36,13 @@ public class Pronostico {
 	/**
 	 * ------- GETTERS AND SETTERS -------
 	 */
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Partido getPartido() {
 		return partido;
