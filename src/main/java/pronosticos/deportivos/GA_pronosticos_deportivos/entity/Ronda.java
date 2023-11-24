@@ -1,9 +1,11 @@
 package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ronda {
-	private String nro;
+	private Integer id;
+	private int nro;
 	private List<Partido> partidos;
 
 	/**
@@ -11,9 +13,10 @@ public class Ronda {
 	 */
 
 	public Ronda() {
+		this.partidos = new ArrayList<>();
 	}
 
-	public Ronda(String nro, List<Partido> partidos) {
+	public Ronda(int nro, List<Partido> partidos) {
 		super();
 		this.nro = nro;
 		this.partidos = partidos;
@@ -23,15 +26,26 @@ public class Ronda {
 		return 0;
 	}
 
+	public void agregarPartido(Partido partido) {
+		this.partidos.add(partido);
+	}
+
 	/**
 	 * ------- GETTERS AND SETTERS -------
 	 */
+	public Integer getId() {
+		return id;
+	}
 
-	public String getNro() {
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public int getNro() {
 		return nro;
 	}
 
-	public void setNro(String nro) {
+	public void setNro(int nro) {
 		this.nro = nro;
 	}
 
@@ -41,6 +55,19 @@ public class Ronda {
 
 	public void setPartidos(List<Partido> partidos) {
 		this.partidos = partidos;
+	}
+
+	public int cantidadPartidoRonda(int ronda) {
+		if (ronda == this.getNro()) {
+			return this.partidos.size();
+		} else {
+			return 0;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Ronda [id=" + id + ", nro=" + nro + ", partidos=" + partidos + "]";
 	}
 
 }

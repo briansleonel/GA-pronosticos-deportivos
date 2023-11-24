@@ -1,6 +1,7 @@
 package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 
 public class Pronostico {
+	private Integer id;
 	private Partido partido;
 	private Equipo equipo;
 	private ResultadoEnum resultado;
@@ -27,14 +28,28 @@ public class Pronostico {
 
 	public int puntos() {
 		if (partido.resultado(equipo) == (resultado))
-			return 1;
+			return Puntaje.getPuntos();
 		else
 			return 0;
+	}
+
+	public boolean acierto() {
+		if (partido.resultado(equipo) == (resultado))
+			return true;
+		else
+			return false;
 	}
 
 	/**
 	 * ------- GETTERS AND SETTERS -------
 	 */
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Partido getPartido() {
 		return partido;

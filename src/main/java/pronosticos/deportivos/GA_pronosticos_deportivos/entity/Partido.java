@@ -2,6 +2,7 @@ package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 
 public class Partido {
 
+	private Integer id;
 	private int ronda;
 	private Equipo equipo1;
 	private Equipo equipo2;
@@ -48,6 +49,13 @@ public class Partido {
 	/**
 	 * ------- GETTERS AND SETTERS -------
 	 */
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Equipo getEquipo1() {
 		return equipo1;
