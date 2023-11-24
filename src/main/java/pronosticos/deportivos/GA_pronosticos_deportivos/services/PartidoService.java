@@ -32,7 +32,7 @@ public class PartidoService {
 				partido.setEquipo2(equipo2);
 				partido.setGolesEquipo1(rs.getInt("goles_equipo_1"));
 				partido.setGolesEquipo2(rs.getInt("goles_equipo_2"));
-				partido.setRonda(rs.getInt("ronda"));
+				partido.setRonda(rs.getInt("ronda_id"));
 			}
 			return partido;
 		} catch (Exception e) {

@@ -22,16 +22,73 @@ public class Usuario {
 		this.pronosticos.add(pronostico);
 	}
 
-	public int puntos(List<Resultado> resultado) {
+	// List<Resultado> resultado
+	public int puntos() {
 		int puntos = 0;
 		for (Pronostico p : this.pronosticos) {
-			for (Resultado r : resultado) {
-				if (p.getResultado() == r.getResultado()) {
-					System.out.println(r.getPuntos());
-					puntos += r.getPuntos();
-				}
+			puntos += p.puntos();
+		}
+		return puntos;
+	}
+
+	public int puntosRonda(Ronda ronda) {
+		int puntos = 0;
+		int aciertosTotales = 0;
+		List<Pronostico> listadoPronosticoRonda = new ArrayList<>();
+
+		for (Pronostico p : pronosticos) {
+			if (p.getPartido().getRonda() == ronda.getNro()) {
+				listadoPronosticoRonda.add(p);
 			}
 		}
+
+		for (Pronostico p : listadoPronosticoRonda) {
+			puntos += p.puntos();
+			if (p.acierto()) {
+				aciertosTotales++;
+			}
+		}
+
+		/*
+		 * Agregamos puntos extra si se acierta todos los pronosticos de una ronda En el
+		 * caso de que acierte solo la mitad, agregamos los puntos correspondientes
+		 */
+		if (ronda.cantidadPartidoRonda(ronda.getNro()) == listadoPronosticoRonda.size()) {
+			puntos += Puntaje.getPuntosExtraRonda();
+		} else if (aciertosTotales >= ronda.cantidadPartidoRonda(ronda.getNro()) / 2) {
+			puntos += Puntaje.getPuntosExtraMediaRonda();
+		}
+
+		return puntos;
+	}
+	
+	public int puntosExtraRonda(Ronda ronda) {
+		int puntos = 0;
+		int aciertosTotales = 0;
+		List<Pronostico> listadoPronosticoRonda = new ArrayList<>();
+
+		for (Pronostico p : pronosticos) {
+			if (p.getPartido().getRonda() == ronda.getNro()) {
+				listadoPronosticoRonda.add(p);
+			}
+		}
+
+		for (Pronostico p : listadoPronosticoRonda) {
+			if (p.acierto()) {
+				aciertosTotales++;
+			}
+		}
+
+		/*
+		 * Agregamos puntos extra si se acierta todos los pronosticos de una ronda En el
+		 * caso de que acierte solo la mitad, agregamos los puntos correspondientes
+		 */
+		if (ronda.cantidadPartidoRonda(ronda.getNro()) == listadoPronosticoRonda.size()) {
+			puntos += Puntaje.getPuntosExtraRonda();
+		} else if (aciertosTotales >= ronda.cantidadPartidoRonda(ronda.getNro()) / 2) {
+			puntos += Puntaje.getPuntosExtraMediaRonda();
+		}
+
 		return puntos;
 	}
 

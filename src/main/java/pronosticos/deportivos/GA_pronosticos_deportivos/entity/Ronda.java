@@ -1,5 +1,6 @@
 package pronosticos.deportivos.GA_pronosticos_deportivos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ronda {
@@ -12,6 +13,7 @@ public class Ronda {
 	 */
 
 	public Ronda() {
+		this.partidos = new ArrayList<>();
 	}
 
 	public Ronda(int nro, List<Partido> partidos) {
@@ -22,6 +24,10 @@ public class Ronda {
 
 	public int puntos() {
 		return 0;
+	}
+
+	public void agregarPartido(Partido partido) {
+		this.partidos.add(partido);
 	}
 
 	/**
@@ -57,6 +63,11 @@ public class Ronda {
 		} else {
 			return 0;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Ronda [id=" + id + ", nro=" + nro + ", partidos=" + partidos + "]";
 	}
 
 }

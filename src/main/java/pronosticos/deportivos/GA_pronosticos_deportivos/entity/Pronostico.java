@@ -28,9 +28,16 @@ public class Pronostico {
 
 	public int puntos() {
 		if (partido.resultado(equipo) == (resultado))
-			return 1;
+			return Puntaje.getPuntos();
 		else
 			return 0;
+	}
+
+	public boolean acierto() {
+		if (partido.resultado(equipo) == (resultado))
+			return true;
+		else
+			return false;
 	}
 
 	/**
